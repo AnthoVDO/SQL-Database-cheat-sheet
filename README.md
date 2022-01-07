@@ -25,11 +25,13 @@ REMARK: if there is no message after typing a command, it mean that the command 
 ```ALTER TABLE table_name ADD PRIMARY KEY(column_name);```=> set a column that uniquely identifies each row in the table // Only one per table  
 ```ALTER TABLE table_name DROP CONSTRAINT constraint_name;``` => remove the constrait // used to remove the primary can if we set to the wrong column REMARK: the constraint may have an other name that the column name. Exemple: ```"characters_pkey" PRIMARY KEY, btree (character_id)``` here, the constraint name is ```characters_pkey```  
 ```ALTER TABLE table_name ADD COLUMN column_name DATATYPE REFERENCES referenced_table_name(referenced_column_name);``` => Used to connect database between them. It is to add a foreign key  
-```ALTER TABLE table_name ADD UNIQUE(column_name);``` => add it to the foreign key to enforce the relation one-to-one. Normaly it's already but it's better to do it to make sure that one row in the table A is exactly one row in table B  
+```ALTER TABLE table_name ADD UNIQUE(column_name);``` => add it to the foreign key to enforce the relation one-to-one. 
 ```ALTER TABLE table_name ALTER COLUMN column_name SET NOT NULL;``` => Set a colum not null. Used with relationnal database. If a table A is connected to a table B, it isn't possible to have a row A without a row B  
-``````  
-``````  
-
+```SELECT columns FROM table_name WHERE condition;```  
+```CREATE TABLE table_name(column_name DATATYPE CONSTRAINTS);``` => Create a table with a column  
+```ALTER TABLE table_name ADD FOREIGN KEY(column_name) REFERENCES referenced_table(referenced_column);```  => SET an existing  column as a foreign key  
+```ALTER TABLE table_name ADD PRIMARY KEY(column1, column2);``` => Create a primary key  from 2 column, know as a composite primary key  
+```SELECT columns FROM table_1 FULL JOIN table_2 ON table_1.primary_key_column = table_2.foreign_key_column;``` => 
 
 ### Types  
 ```INT```  
@@ -38,3 +40,12 @@ REMARK: if there is no message after typing a command, it mean that the command 
 ```NOT NULL``` => Add NOT NULL after the colum type to avoid null data ex: ALTER TABLE characters ADD COLUMN name VARCHAR(30) NOT NULL;  
 ```DATE```  => DATE  
 ```NUMERIC(4,1)``` => Data type for decimal up to 4 digit and 1 is to the right of the decimal  
+### Database relation ship  
+There are 3 possibilities:
+- one-to-one  
+- one-to-many  
+- many-to-many  
+For the *one-to-one*, we need to add a foreign key and unique  
+For the *one-to-many*, we need to add a foreign key  
+For the *many-to-many*, we need to create a junction table which will take the junction name to make 2 *one-to-many* relation with the table **characters** and **actions** => junction table => **characters_actions**  
+
